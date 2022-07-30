@@ -24,7 +24,7 @@ const FlexBetween = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 700px;
+  width: 800px;
   background-color: ${({ back }) => (back ? back : "white")};
   padding: ${({ padding }) => (padding ? `10px ${padding}px` : "0")};
   margin: ${({ margin }) => (margin ? `${margin}px 0` : "0 0 0 0")};
@@ -39,7 +39,7 @@ const AddButton = styled.button`
   justify-content: center;
   height: 40px;
   padding: 0 10px;
-  border-radius: 5px;
+  border-radius: 3px;
   border: ${({ border }) => (border ? `2px solid ${border}` : "none")};
   color: ${({ rang }) => (rang ? rang : "white")};
   background-color: ${({ back }) => (back ? back : "blue")};
@@ -49,14 +49,14 @@ const AddButton = styled.button`
   :hover {
     cursor: pointer;
   }
-  margin-right: 10px;
+
 `;
 const Divacha = styled.div`
   width: 100%;
   margin-top: ${({ state }) => (state ? "0" : "-90px")};
 `;
 const InputSearch = styled.input`
-  padding: 0 15px;
+  padding: ${({ pading }) => (pading ? `0 ${pading}px` : "0 15px")};
   z-index: 8;
   height: 40px;
   width: ${({ uzunligi }) => (uzunligi ? `${uzunligi}px` : "200px")};

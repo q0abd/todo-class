@@ -15,6 +15,7 @@ export default class App extends Component {
       data: [],
       addValue: "",
       newUserButton: false,
+
       firstname: "",
       lastname: "",
       address: "",
@@ -86,15 +87,22 @@ export default class App extends Component {
       lastname2,
       address2,
     } = this.state;
+
     return (
       <Container>
         <FlexBetween>
-          <InputSearch
-            placeholder="Search users"
-            height={40}
-            mar
-            onChange={(e) => this.setState({ searchValue: e.target.value })}
-          />
+          <div style={{ position: "relative" }}>
+            <InputSearch
+              pading="30"
+              placeholder="Search users"
+              height={40}
+              mar
+              onChange={(e) => this.setState({ searchValue: e.target.value })}
+            />
+            <p style={{ position: "absolute", top: "10px", left: "10px" }}>
+              🔎
+            </p>
+          </div>
 
           <div
             onClick={() =>
@@ -106,7 +114,19 @@ export default class App extends Component {
                 <AddButton margin onClick={() => this.addUser()}>
                   ✅ Add User
                 </AddButton>
-                <AddButton>❌</AddButton>
+                <AddButton
+                  style={{
+                    marginLeft: "10px",
+                    padding: "0 15px",
+                    fontWeight: "900",
+                    fontSize: "20px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  x
+                </AddButton>
               </div>
             ) : (
               <AddButton>✚ New User</AddButton>
@@ -139,105 +159,107 @@ export default class App extends Component {
           </FlexBetween>
         </Divchacha>
         <Divacha state={this.state.newUserButton}>
-          <table
-            border={1}
-            style={{ borderCollapse: "collapse", marginTop: "10px" }}
-          >
-            <thead>
-              <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Address</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.data.map(
-                (val) =>
-                  (val.firstname
-                    .toLowerCase()
-                    .includes(this.state.searchValue.toLowerCase()) ||
-                    val.lastname
+          {this.state.data.length >= 1 && (
+            <table
+              border={1}
+              style={{ borderCollapse: "collapse", marginTop: "10px" }}
+            >
+              <thead>
+                <tr>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Address</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.data.map(
+                  (val) =>
+                    (val.firstname
                       .toLowerCase()
                       .includes(this.state.searchValue.toLowerCase()) ||
-                    val.address
-                      .toLowerCase()
-                      .includes(this.state.searchValue.toLowerCase())) && (
-                    <tr key={val.id}>
-                      {selected === val.id ? (
-                        <>
-                          <td>
-                            <InputSearch
-                              name="firstname2"
-                              value={firstname2}
-                              uzunligi={150}
-                              onChange={(e) => onChangeAll2(e)}
-                            />
-                          </td>
-                          <td>
-                            <InputSearch
-                              name="lastname2"
-                              value={lastname2}
-                              uzunligi={150}
-                              onChange={(e) => onChangeAll2(e)}
-                            />
-                          </td>
-                          <td>
-                            <InputSearch
-                              name="address2"
-                              value={address2}
-                              uzunligi={150}
-                              onChange={(e) => onChangeAll2(e)}
-                            />
-                          </td>
-                        </>
-                      ) : (
-                        <>
-                          <td>{val.firstname}</td>
-                          <td>{val.lastname}</td>
-                          <td>{val.address}</td>
-                        </>
-                      )}
-                      <td className="flex">
+                      val.lastname
+                        .toLowerCase()
+                        .includes(this.state.searchValue.toLowerCase()) ||
+                      val.address
+                        .toLowerCase()
+                        .includes(this.state.searchValue.toLowerCase())) && (
+                      <tr key={val.id}>
                         {selected === val.id ? (
-                          <AddButton
-                            rang="green"
-                            back="white"
-                            border="green"
-                            onClick={() => this.saveUser()}
-                          >
-                            Save ✅
-                          </AddButton>
+                          <>
+                            <td>
+                              <InputSearch
+                                name="firstname2"
+                                value={firstname2}
+                                uzunligi={150}
+                                onChange={(e) => onChangeAll2(e)}
+                              />
+                            </td>
+                            <td>
+                              <InputSearch
+                                name="lastname2"
+                                value={lastname2}
+                                uzunligi={150}
+                                onChange={(e) => onChangeAll2(e)}
+                              />
+                            </td>
+                            <td>
+                              <InputSearch
+                                name="address2"
+                                value={address2}
+                                uzunligi={150}
+                                onChange={(e) => onChangeAll2(e)}
+                              />
+                            </td>
+                          </>
                         ) : (
-                          <AddButton
-                            rang="orange"
-                            back="white"
-                            border="orange"
-                            onClick={() => this.editUser(val)}
-                          >
-                            Edit ✏️
-                          </AddButton>
+                          <>
+                            <td>{val.firstname}</td>
+                            <td>{val.lastname}</td>
+                            <td>{val.address}</td>
+                          </>
                         )}
-                        <AddButton
-                          onClick={() =>
-                            this.setState({
-                              data: this.state.data.filter(
-                                (v) => v.id !== val.id
-                              ),
-                            })
-                          }
-                          rang="red"
-                          back="white"
-                          border="red"
-                        >
-                          Delete ❌
-                        </AddButton>
-                      </td>
-                    </tr>
-                  )
-              )}
-            </tbody>
-          </table>
+                        <td className="flex">
+                          {selected === val.id ? (
+                            <AddButton
+                              rang="green"
+                              back="white"
+                              border="green"
+                              onClick={() => this.saveUser()}
+                            >
+                              Save ✅
+                            </AddButton>
+                          ) : (
+                            <AddButton
+                              rang="orange"
+                              back="white"
+                              border="orange"
+                              onClick={() => this.editUser(val)}
+                            >
+                              Edit ✏️
+                            </AddButton>
+                          )}
+                          <AddButton
+                            onClick={() =>
+                              this.setState({
+                                data: this.state.data.filter(
+                                  (v) => v.id !== val.id
+                                ),
+                              })
+                            }
+                            rang="red"
+                            back="white"
+                            border="red"
+                          >
+                            Delete ❌
+                          </AddButton>
+                        </td>
+                      </tr>
+                    )
+                )}
+              </tbody>
+            </table>
+          )}
         </Divacha>
       </Container>
     );
