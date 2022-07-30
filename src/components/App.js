@@ -18,7 +18,6 @@ export default class App extends Component {
       firstname: "",
       lastname: "",
       address: "",
-      errorHandle: false,
       selected: null,
       firstname2: "",
       lastname2: "",
@@ -207,7 +206,7 @@ export default class App extends Component {
                             border="green"
                             onClick={() => this.saveUser()}
                           >
-                            Save
+                            Save ✅
                           </AddButton>
                         ) : (
                           <AddButton
@@ -216,7 +215,7 @@ export default class App extends Component {
                             border="orange"
                             onClick={() => this.editUser(val)}
                           >
-                            Edit
+                            Edit ✏️
                           </AddButton>
                         )}
                         <AddButton
@@ -231,7 +230,7 @@ export default class App extends Component {
                           back="white"
                           border="red"
                         >
-                          Delete
+                          Delete ❌
                         </AddButton>
                       </td>
                     </tr>
